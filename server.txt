@@ -1,0 +1,3 @@
+for the server to start
+**need to run for application to work**
+json-server --watch db.json --port 3001

@@ -1,0 +1,16 @@
+{
+  "budgetItems": [
+    {
+      "id": "1701811699603",
+      "item": "22",
+      "budget": 22,
+      "userId": "65662798e8072d4abfde421e"
+    },
+    {
+      "id": "1701813634053",
+      "item": "sadsa",
+      "budget": 3232,
+      "userId": "65652ab0630e9af0ec81e4d0"
+    }
+  ]
+}
