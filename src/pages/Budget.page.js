@@ -48,6 +48,7 @@ const BudgetPage = () => {
     //fetches user item and posts it to budget and the db.json 
     fetch(`http://localhost:3001/users/${user.id}/budgetItems`, {
       // post method for updating the budget
+      // API USED HERE
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -89,6 +90,7 @@ const BudgetPage = () => {
   
     // Update server data with deleting budget item
     fetch(`http://localhost:3001/budgetItems/${id}`, {
+      // API USED HERE FOR DELETING FROM SERVER
       method: 'DELETE',
     })
       .then(response => {
@@ -131,9 +133,7 @@ const totalBudget = Array.isArray(budgetItems)
 ? budgetItems.reduce((total, item) => total + item.budget, 0)
 : 0;
 
-  /*
-  returns the actual budget app
-  */
+  // returns the actual budget app
   return (
     <form>
       <div className="App">

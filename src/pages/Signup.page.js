@@ -42,6 +42,7 @@ const Signup = () => {
       if (user) {
         // Send a POST request to server
         const response = await fetch('http://localhost:3001/budgetItems', {
+          // API USED HERE FOR POSTING TO THE SERVER
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
