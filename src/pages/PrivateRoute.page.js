@@ -1,3 +1,5 @@
+// private route page for users for security purposes and auto login
+// page used from mongodb tutorial
 import { useContext } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { UserContext } from "../contexts/user.context";

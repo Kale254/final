@@ -1,7 +1,13 @@
+/* 
+Budget page for application. Allows users to have thier own application so they have their own data
+Uses mui theme for styling and react for a framework. 
+*/
 import { Button } from '@mui/material'
 import { useContext, useState, useEffect } from 'react';
+// calls user information for user specific assignments
 import { UserContext } from '../contexts/user.context';
 
+// actual budget page
 const BudgetPage = () => {
   // state hooks for managing items
   const { logOutUser, user } = useContext(UserContext);
@@ -10,12 +16,16 @@ const BudgetPage = () => {
   const [allocatedBudget, setAllocatedBudget] = useState(0);
   const [error, setError] = useState('');
 
+  //use effect for getting the user and their budget items
   useEffect(() => {
     if (user) {
+      // log for debugging purposes
       console.log('Fetching budget items for user ID:', user.id);
+      // calls user and gets the budget items
       fetch(`http://localhost:3001/users/${user.id}/budgetItems`)
         .then(response => response.json())
         .then(data => {
+          // log for debugging purposes with the users budget items
           console.log('Fetched budget items:', data);
           setBudgetItems(data);
         })
@@ -23,30 +33,39 @@ const BudgetPage = () => {
     }
   }, [user]);
 
+  // add item to budget
   const addBudgetItem = () => {
+    // makes sure all fields are inputted
     if (newBudgetItem.trim() === '' || isNaN(allocatedBudget) || allocatedBudget <= 0) {
+      // error if fields aren't 
       setError('Both fields are required, and Allocated Budget must be a valid number greater than 0.');
       return;
     }
-  
+    
+    // newItem is a way for json to understand what is being created and by whom
     const newItem = { id: Date.now().toString(), item: newBudgetItem, budget: allocatedBudget, userId: user.id };
   
+    //fetches user item and posts it to budget and the db.json 
     fetch(`http://localhost:3001/users/${user.id}/budgetItems`, {
+      // post method for updating the budget
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      //puts item to a json
       body: JSON.stringify(newItem),
     })
       .then(response => {
         if (!response.ok) {
+          //if budget item couldn't be added
           throw new Error('Failed to add budget item');
         }
         return response.json();
       })
       .then(updatedItems => {
+        // console log for debugging
         console.log('Updated items:', updatedItems);
-        // Re-fetch data from the server to get the latest items
+        // Re fetch data from the server to get the latest items
         fetch('http://localhost:3001/budgetItems')
           .then(response => response.json())
           .then(data => setBudgetItems(data))
@@ -60,6 +79,7 @@ const BudgetPage = () => {
       .catch(error => console.error('Error adding budget item:', error));
   };
   
+  // removes item from the users budget
   const removeBudgetItem = (id, event) => {
     // Prevent the default form submission behavior
     event.preventDefault();
@@ -67,7 +87,7 @@ const BudgetPage = () => {
     // Log to check if the function is being called and the ID is correct
     console.log('Removing budget item with ID:', id);
   
-    // Update server data
+    // Update server data with deleting budget item
     fetch(`http://localhost:3001/budgetItems/${id}`, {
       method: 'DELETE',
     })
@@ -150,7 +170,9 @@ const totalBudget = Array.isArray(budgetItems)
         ) : Array.isArray(budgetItems) ? (
           <ul>
             {budgetItems
-              .filter((item) => item.userId === user.id) // Filter items for the current user
+              // Filter items for the current user, this was a main issue I was trying to fix
+              // fixed with adding a filter, used chatgpt to figure this out
+              .filter((item) => item.userId === user.id) 
               .map((item) => (
                 <li key={item.id}>
                   {item.item} - Budget: ${item.budget}

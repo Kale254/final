@@ -1,14 +1,15 @@
+// page for logging in the user from an already made account
 import { Button } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/user.context";
 
+// beggining of login function 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // We are consuming our user-management context to
-  // get & set the user details here
+  // Using usermanagement context to get & set the user details here
   const { user, fetchUser, emailPasswordLogin } = useContext(UserContext);
 
   // Set the initial state with predefined values
@@ -17,24 +18,19 @@ const Login = () => {
     password: "examplepassword",
   });
 
-  // This function will be called whenever the user edits the form.
+  // function will be called whenever the user edits the form.
   const onFormInputChange = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
 
-  // This function will redirect the user to the
-  // appropriate page once the authentication is done.
+  // redirect the user to the appropriate page once the authentication is done.
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
     navigate(redirectTo ? redirectTo : "/");
   };
 
-  // Once a user logs in to our app, we don’t want to ask them for their
-  // credentials again every time the user refreshes or revisits our app,
-  // so we are checking if the user is already logged in and
-  // if so we are redirecting the user to the home page.
-  // Otherwise, we will do nothing and let the user log in.
+  // checks if user has already logged in and then automatically redirects them to the page
   const loadUser = async () => {
     if (!user) {
       const fetchedUser = await fetchUser();
@@ -46,8 +42,7 @@ const Login = () => {
   };
 
   // This useEffect will run only once when the component is mounted.
-  // Hence this is helping us in verifying whether the user is already logged in
-  // or not.
+  // helpingin verifying whether the user is already logged in or not.
   useEffect(() => {
     loadUser(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -55,9 +50,7 @@ const Login = () => {
   // This function gets fired when the user clicks on the "Login" button.
   const onSubmit = async (event) => {
     try {
-      // Here we are passing user details to our emailPasswordLogin
-      // function that we imported from our realm/authentication.js
-      // to validate the user credentials and log in the user into our App.
+      // Hpassing user details to our emailPasswordLogin
       const user = await emailPasswordLogin(form.email, form.password);
       if (user) {
         redirectNow();
@@ -71,6 +64,7 @@ const Login = () => {
     }
   };
 
+  // returns the actual login form with styling of mui
   return (
     <form
       style={{

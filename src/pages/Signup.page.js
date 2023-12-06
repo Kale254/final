@@ -1,13 +1,18 @@
+// signup page for users to be registered to use the application
 import { Button} from "@mui/material";
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/user.context";
 
+// start of signup function
 const Signup = () => {
+  // navigation for putting users to correct page and location for getting location of page
   const navigate = useNavigate();
   const location = useLocation();
 
+  // setting up the for to make sure users are signed up and it goes to database
   const { emailPasswordSignup } = useContext(UserContext);
+  // makes sure the form is filled with something before users loggin
   const [form, setForm] = useState({
     email: "example@example.com",
     password: "examplepassword"
@@ -20,11 +25,13 @@ const Signup = () => {
     setForm({ ...form, [name]: value });
   };
 
+  // redirects to the budget page
   const redirectNow = () => {
     const redirectTo = location.search.replace("?redirectTo=", "");
     navigate(redirectTo ? redirectTo : "/");
   };
 
+  // handles the submit button
   const onSubmit = async () => {
     try {
       // Call your signup function from the UserContext
@@ -33,7 +40,7 @@ const Signup = () => {
       // If the user is successfully created in your authentication system,
       // send the user data to your server
       if (user) {
-        // Send a POST request to your server
+        // Send a POST request to server
         const response = await fetch('http://localhost:3001/budgetItems', {
           method: 'POST',
           headers: {
@@ -54,6 +61,8 @@ const Signup = () => {
     }
   };
 
+  // returns the signup page for client side
+  // uses mui for styling 
   return (
     <form style={{ display: "flex", flexDirection: "column", maxWidth: "300px", margin: "auto" }}>
       <h1>Signup</h1>

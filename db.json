@@ -1,16 +1,27 @@
 {
   "budgetItems": [
     {
-      "id": "1701811699603",
-      "item": "22",
-      "budget": 22,
+      "id": "1701881462361",
+      "item": "grociers",
+      "budget": 100,
+      "userId": "65652ab0630e9af0ec81e4d0"
+    },
+    {
+      "id": "1701881473428",
+      "item": "shemmy",
+      "budget": 20032,
+      "userId": "65652ab0630e9af0ec81e4d0"
+    },
+    {
+      "id": "1701881495061",
+      "item": "new users",
+      "budget": 23232,
       "userId": "65662798e8072d4abfde421e"
     },
     {
-      "id": "1701813634053",
-      "item": "sadsa",
-      "budget": 3232,
-      "userId": "65652ab0630e9af0ec81e4d0"
+      "email": "emmaiscool@email.com",
+      "password": "Kwpurple2!",
+      "id": "ZY4-mQK"
     }
   ]
 }
