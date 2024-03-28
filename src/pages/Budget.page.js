@@ -129,9 +129,11 @@ const BudgetPage = () => {
   }
 
   // calculates total budget cost of all items
-const totalBudget = Array.isArray(budgetItems)
-? budgetItems.reduce((total, item) => total + item.budget, 0)
-: 0;
+const totalBudget = Array.isArray(budgetItems) && budgetItems.length > 0
+  ? budgetItems
+      .filter((item) => item.userId === user.id)
+      .reduce((total, item) => total + item.budget, 0)
+  : 0;
 
   // returns the actual budget app
   return (
@@ -165,13 +167,10 @@ const totalBudget = Array.isArray(budgetItems)
 
         {error && <p className="error">{error}</p>}
 
-        {Array.isArray(budgetItems) && budgetItems.length === 0 ? (
-          <p>No budget items</p>
-        ) : Array.isArray(budgetItems) ? (
+        {Array.isArray(budgetItems) && budgetItems.length > 0 ? (
+        <>
           <ul>
             {budgetItems
-              // Filter items for the current user, this was a main issue I was trying to fix
-              // fixed with adding a filter, used chatgpt to figure this out
               .filter((item) => item.userId === user.id) 
               .map((item) => (
                 <li key={item.id}>
@@ -180,9 +179,10 @@ const totalBudget = Array.isArray(budgetItems)
                 </li>
               ))}
           </ul>
-        ) : null}
 
-        <li>Total: ${totalBudget}</li>
+          <li>Total: ${totalBudget}</li>
+        </>
+      ) : null}
 
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <Button variant="contained" onClick={logOut}>

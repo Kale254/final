@@ -1,27 +1,45 @@
 {
   "budgetItems": [
     {
-      "id": "1701881462361",
-      "item": "grociers",
-      "budget": 100,
-      "userId": "65652ab0630e9af0ec81e4d0"
-    },
-    {
-      "id": "1701881473428",
-      "item": "shemmy",
-      "budget": 20032,
-      "userId": "65652ab0630e9af0ec81e4d0"
-    },
-    {
-      "id": "1701881495061",
-      "item": "new users",
-      "budget": 23232,
+      "id": "1701900390974",
+      "item": "kdwetjen",
+      "budget": 2002320,
       "userId": "65662798e8072d4abfde421e"
     },
     {
-      "email": "emmaiscool@email.com",
-      "password": "Kwpurple2!",
-      "id": "ZY4-mQK"
+      "id": "1701988233361",
+      "item": "new item",
+      "budget": 23000,
+      "userId": "65652ab0630e9af0ec81e4d0"
+    },
+    {
+      "id": "1701988253735",
+      "item": "2nd item added",
+      "budget": 2300232,
+      "userId": "65652ab0630e9af0ec81e4d0"
+    },
+    {
+      "id": "1701988279977",
+      "item": "kawetj0",
+      "budget": 2232,
+      "userId": "65662798e8072d4abfde421e"
+    },
+    {
+      "id": "1701988324176",
+      "item": "kale",
+      "budget": 23,
+      "userId": "65652ab0630e9af0ec81e4d0"
+    },
+    {
+      "email": "lori@lori.email.com",
+      "password": "lori1233",
+      "id": "-vdhuFT"
+    },
+    {
+      "id": "1702058548941",
+      "item": "loriitem",
+      "budget": 2300,
+      "userId": "65735a1fa59b31c66fdd838e"
     }
   ]
 }
